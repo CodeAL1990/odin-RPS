@@ -6,7 +6,7 @@ function getComputerChoice() {
     //Pick a choice randomly
     const chosen = Math.floor(Math.random() * choice.length);
     //console.log(chosen);
-    //Returned a number and i was wondering how to return an array item
+    //Returned a number and was wondering how to return an array item
     //Google search skill failed and asked chatGPT how to return an array item
     return choice[chosen];
 }
@@ -47,19 +47,28 @@ console.log(result);
 //Initialize variable for player in global scope
 //if put inside the game() function it will reset to 0 everytime it's called
 let playerWins = 0;
+let computerWins = 0;
 
 function game() {
 
-
+    //Best of 5
     //If player wins, add 1 to playerWins variable
     if (result.includes("win")) {
         playerWins++;
+    } else if (result.includes("lose")) {
+        computerWins++;
     }
 
-    return playerWins;
+    if (playerWins === 3) {
+        return "You win this bo5!";
+    } else if (computerWins === 3) {
+        return "You lose this bo5!";
+    }
+
 }
 
-    
-
 console.log(game());
-
+console.log(game());
+console.log(game());
+console.log(game());
+console.log(game());
