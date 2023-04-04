@@ -34,41 +34,64 @@ function playRound(playerSelection, computerSelection) {
         } else {
             return "Please type rock, paper or scissors!";
         }
-    
+
     }
 
 //user1 picks an option from rock, paper and scissors
 //initialize player input
-const playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
-const computerSelection = getComputerChoice();
-const result = playRound(playerSelection, computerSelection);
-console.log(result);
+//*const playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
+//*const computerSelection = getComputerChoice();
+//*const result = playRound(playerSelection, computerSelection);
+//*console.log(result);
 
 //Initialize variable for player in global scope
 //if put inside the game() function it will reset to 0 everytime it's called
-let playerWins = 0;
-let computerWins = 0;
+//*let playerWins = 0;
+//*let computerWins = 0;
 
-function game() {
+//*function game() {
 
     //Best of 5
     //If player wins, add 1 to playerWins variable
-    if (result.includes("win")) {
-        playerWins++;
-    } else if (result.includes("lose")) {
-        computerWins++;
+    //*if (result.includes("win")) {
+    //*    playerWins++;
+    //*} else if (result.includes("lose")) {
+    //*    computerWins++;
+    //*}
+
+    //*if (playerWins === 3) {
+    //*    return "You win this bo5!";
+    //*} else if (computerWins === 3) {
+    //*    return "You lose this bo5!";
+    //*}
+
+//*}
+
+function game() {
+    let playerWins = 0;
+    let computerWins = 0;
+
+    while (playerWins < 3 && computerWins < 3) {
+        const playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
+        const computerSelection = getComputerChoice();
+        const result = playRound(playerSelection, computerSelection);
+
+        console.log(result);
+
+        if (result.includes("win")) {
+            playerWins++;
+        } else if (result.includes("lose")) {
+            computerWins++;
+        }
+
+        console.log(`Player: ${playerWins} - Computer: ${computerWins}`);
     }
 
     if (playerWins === 3) {
         return "You win this bo5!";
-    } else if (computerWins === 3) {
+    } else {
         return "You lose this bo5!";
     }
-
 }
 
-console.log(game());
-console.log(game());
-console.log(game());
-console.log(game());
 console.log(game());
