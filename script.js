@@ -1,7 +1,8 @@
+//user2 picks *randomly from option rock, paper and scissors
+//initialize possible choices for computer and player
+const choice = ["rock", "paper", "scissors"];
+
 function getComputerChoice() {
-    //user2 picks *randomly from option rock, paper and scissors
-    //initialize possible choices for computer
-    const choice = ["rock", "paper", "scissors"];
 
     //Pick a choice randomly
     const chosen = Math.floor(Math.random() * choice.length);
@@ -13,13 +14,8 @@ function getComputerChoice() {
 
 
 function playRound(playerSelection, computerSelection) {
-        //if user1 and user2 picks the same option, it's a draw
-        //if user1 picks rock and user 2 picks paper and vice versa, paper wins
-        //if user1 picks paper and user 2 picks scissors and vice versa, scissors wins
-        //if user1 picks scissors and user 2 picks rock and vice versa, rock wins
-        if (playerSelection === computerSelection) {
-            return "It's a draw!";
-        } else if (playerSelection === "rock" && computerSelection === "paper") {
+    
+        if (playerSelection === "rock" && computerSelection === "paper") {
             return "Paper beats rock, you lose!";
         } else if (playerSelection === "rock" && computerSelection === "scissors") {
             return "Rock beats scissors, you win!";
@@ -32,66 +28,38 @@ function playRound(playerSelection, computerSelection) {
         } else if (playerSelection === "scissors" && computerSelection === "paper") {
             return "Scissors beats paper, you win!";
         } else {
-            return "Please type rock, paper or scissors!";
+            return "It's a draw!";
         }
 
     }
 
-//user1 picks an option from rock, paper and scissors
-//initialize player input
-//*const playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
-//*const computerSelection = getComputerChoice();
-//*const result = playRound(playerSelection, computerSelection);
-//*console.log(result);
 
-//Initialize variable for player in global scope
-//if put inside the game() function it will reset to 0 everytime it's called
-//*let playerWins = 0;
-//*let computerWins = 0;
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector('#scissors');
+const result = document.querySelector('#result');
 
-//*function game() {
 
-    //Best of 5
-    //If player wins, add 1 to playerWins variable
-    //*if (result.includes("win")) {
-    //*    playerWins++;
-    //*} else if (result.includes("lose")) {
-    //*    computerWins++;
-    //*}
+rock.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    const chooseRock = document.createElement('p');
+    chooseRock.textContent = `You picked ${choice[0]}, Computer picked ${computerSelection}, ${playRound(choice[0], computerSelection)}`;
 
-    //*if (playerWins === 3) {
-    //*    return "You win this bo5!";
-    //*} else if (computerWins === 3) {
-    //*    return "You lose this bo5!";
-    //*}
+    result.appendChild(chooseRock);
+})
 
-//*}
+paper.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    const choosePaper = document.createElement('p');
+    choosePaper.textContent = `You picked ${choice[1]}, Computer picked ${computerSelection}, ${playRound(choice[1], computerSelection)}`;
 
-function game() {
-    let playerWins = 0;
-    let computerWins = 0;
+    result.appendChild(choosePaper);
+})
 
-    while (playerWins < 3 && computerWins < 3) {
-        const playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
-        const computerSelection = getComputerChoice();
-        const result = playRound(playerSelection, computerSelection);
+scissors.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    const chooseScissors = document.createElement('p');
+    chooseScissors.textContent = `You picked ${choice[2]}, Computer picked ${computerSelection}, ${playRound(choice[2], computerSelection)}`;
 
-        console.log(result);
-
-        if (result.includes("win")) {
-            playerWins++;
-        } else if (result.includes("lose")) {
-            computerWins++;
-        }
-
-        console.log(`Player: ${playerWins} - Computer: ${computerWins}`);
-    }
-
-    if (playerWins === 3) {
-        return "You win this bo5!";
-    } else {
-        return "You lose this bo5!";
-    }
-}
-
-console.log(game());
+    result.appendChild(chooseScissors);
+})
