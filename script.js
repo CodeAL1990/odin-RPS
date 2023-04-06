@@ -63,3 +63,12 @@ scissors.addEventListener('click', () => {
 
     result.appendChild(chooseScissors);
 })
+
+function gameScore() {
+    let playerScore = 0;
+    let computerScore = 0;
+
+    while (playerScore < 3 && computerScore < 3) {
+        //this is probably wrong lol
+    }
+}
