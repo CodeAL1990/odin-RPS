@@ -38,37 +38,85 @@ const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector('#scissors');
 const result = document.querySelector('#result');
+const scoreDisplay = document.querySelector('#scoreDisplay');
+const newGame = document.querySelector('#newGame');
 
+newGame.addEventListener('click', () => {
+    playerScore = 0;
+    computerScore = 0;
+    result.textContent = "";
+    scoreDisplay.textContent = `Current score - Player: ${playerScore} Computer: ${computerScore}`
+    rock.hidden = false;
+    paper.hidden = false;
+    scissors.hidden = false;
+    
+})
 
 rock.addEventListener('click', () => {
     const computerSelection = getComputerChoice();
+    const roundResult = playRound(choice[0], computerSelection);
     const chooseRock = document.createElement('p');
-    chooseRock.textContent = `You picked ${choice[0]}, Computer picked ${computerSelection}, ${playRound(choice[0], computerSelection)}`;
+    chooseRock.textContent = `You picked ${choice[0]}, Computer picked ${computerSelection}, ${roundResult}`;
 
     result.appendChild(chooseRock);
+    totalScore(roundResult);
 })
 
 paper.addEventListener('click', () => {
     const computerSelection = getComputerChoice();
+    const roundResult = playRound(choice[1], computerSelection);
     const choosePaper = document.createElement('p');
-    choosePaper.textContent = `You picked ${choice[1]}, Computer picked ${computerSelection}, ${playRound(choice[1], computerSelection)}`;
+    choosePaper.textContent = `You picked ${choice[1]}, Computer picked ${computerSelection}, ${roundResult}`;
 
     result.appendChild(choosePaper);
+    totalScore(roundResult);
 })
 
 scissors.addEventListener('click', () => {
     const computerSelection = getComputerChoice();
+    const roundResult = playRound(choice[2], computerSelection)
     const chooseScissors = document.createElement('p');
-    chooseScissors.textContent = `You picked ${choice[2]}, Computer picked ${computerSelection}, ${playRound(choice[2], computerSelection)}`;
+    chooseScissors.textContent = `You picked ${choice[2]}, Computer picked ${computerSelection}, ${roundResult}`;
 
     result.appendChild(chooseScissors);
+    totalScore(roundResult);
 })
 
-function gameScore() {
-    let playerScore = 0;
-    let computerScore = 0;
+let playerScore = 0;
+let computerScore = 0;
 
-    while (playerScore < 3 && computerScore < 3) {
-        //this is probably wrong lol
+function totalScore(result) {
+
+    if (result.includes("win")) {
+        if (playerScore < 5 && computerScore < 5) {
+            playerScore++;
+        }
+    } else if (result.includes("lose")) {
+        if (computerScore < 5 && playerScore < 5) {
+            computerScore++;
+        }
     }
+
+    if (playerScore === 5) {
+        scoreDisplay.textContent = `Current score - Player: ${playerScore} Computer: ${computerScore}`;
+        const gameResult = document.createElement('p');
+        gameResult.textContent = "  Player wins! Click New Game to play again!";
+        scoreDisplay.appendChild(gameResult);
+        rock.hidden = true;
+        paper.hidden = true;
+        scissors.hidden = true;
+    } else if (computerScore === 5) {
+        scoreDisplay.textContent = `Current score - Player: ${playerScore} Computer: ${computerScore}`;
+        const gameResult = document.createElement('p');
+        gameResult.textContent = "  Computer wins! Click New Game to play again!";
+        scoreDisplay.appendChild(gameResult);
+        rock.hidden = true;
+        paper.hidden = true;
+        scissors.hidden = true;
+    } else {
+        scoreDisplay.textContent = `Current score - Player: ${playerScore} Computer: ${computerScore}`;
+    }
+    
 }
+
+
